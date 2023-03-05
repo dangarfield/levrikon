@@ -1,0 +1,25 @@
+{
+  "name": "levrikon",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "dev": "run-p dev:*",
+    "dev:backend": "npm run dev -w backend",
+    "dev:frontend": "npm run dev -w frontend",
+    "build:frontend": "npm run build -w frontend",
+    "deploy": "push-dir --dir=frontend/_static --branch=gh-pages"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "standard": "^17.0.0"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "dependencies": {
+    "push-dir": "^0.4.1"
+  }
+}
