@@ -1,25 +1,55 @@
 {
-  "name": "levrikon",
-  "version": "0.1.0",
-  "description": "",
+  "name": "vue3-electron-demo",
+  "version": "0.0.1",
+  "description": "A Quasar Framework app",
+  "productName": "Quasar App",
+  "author": "Michael Hoffmann <michael.hoffmann@mokkapps.de>",
+  "private": true,
   "scripts": {
-    "dev": "run-p dev:*",
-    "dev:backend": "npm run dev -w backend",
-    "dev:frontend": "npm run dev -w frontend",
-    "build:frontend": "npm run build -w frontend",
-    "deploy": "push-dir --dir=frontend/_static --branch=gh-pages"
+    "dev": "quasar dev -m electron",
+    "serve:vue": "quasar dev",
+    "serve:electron": "quasar dev -m electron",
+    "lint": "eslint --ext .js,.ts,.vue ./",
+    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
+    "test": "echo \"No test specified\" && exit 0"
   },
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "@quasar/extras": "^1.15.11",
+    "core-js": "^3.6.5",
+    "pinia": "^2.0.11",
+    "pinia-plugin-persistedstate": "^3.1.0",
+    "quasar": "^2.11.7",
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0"
+  },
   "devDependencies": {
-    "npm-run-all": "^4.1.5",
+    "@babel/eslint-parser": "^7.13.14",
+    "@electron/remote": "^2.0.4",
+    "@quasar/app": "^3.0.0",
+    "@types/node": "^12.20.21",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "electron": "^17.0.0",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-vue": "^7.0.0",
+    "prettier": "^2.5.1",
     "standard": "^17.0.0"
   },
-  "workspaces": [
-    "frontend",
-    "backend"
+  "browserslist": [
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
   ],
-  "dependencies": {
-    "push-dir": "^0.4.1"
+  "engines": {
+    "node": ">= 12.22.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
   }
 }
