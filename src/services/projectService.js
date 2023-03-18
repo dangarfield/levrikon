@@ -8,4 +8,10 @@ const doesProjectExistForPath = (filePath) => {
   return stat
 }
 
-export { doesProjectExistForPath }
+const createProject = async (filePath, projectName) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const data = { projectName }
+  await electronApi.writeFileSync(`${String(filePath)}/project.json`, JSON.stringify(data), {})
+}
+
+export { doesProjectExistForPath, createProject }

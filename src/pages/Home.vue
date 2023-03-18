@@ -18,12 +18,12 @@
       <q-card>
         <q-card-section class="row items-center">
           <q-avatar icon="signal_wifi_off" color="primary" text-color="white" />
-          <span class="q-ml-sm">You are currently not connected to any network.</span>
+          <span class="q-ml-sm">Project does not exist yet exist. Create project?</span>
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn flat label="Cancel" color="primary" v-close-popup />
-          <q-btn flat label="Turn on Wifi" color="primary" v-close-popup />
+          <q-btn flat label="No" color="standard" v-close-popup />
+          <q-btn flat label="Yes" color="primary" @click="triggerCreateProject" v-close-popup />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -41,12 +41,12 @@
 import { defineComponent } from 'vue';
 import projectStore from 'src/pinia';
 import { electronApi } from 'src/api/electron-api';
-import { doesProjectExistForPath } from 'src/services/projectService'
+import { doesProjectExistForPath, createProject } from 'src/services/projectService'
 export default defineComponent({
   name: 'PageHome',
   data() {
     return {
-      projectName: 'New Project',
+      projectName: '',
       projectDirectory: '',
       showConfirmNewProject: false,
       isConfirmOpen: false
@@ -60,21 +60,23 @@ export default defineComponent({
     return { store}
   },
   created() {
-    this.projectName = 'in-created'
+    // this.projectName = 'in-created'
   },
   methods: {
             openProjectFolderDialog: async function () {
               const dialogResult = await electronApi.openFolderDialog('AHA', 'folder', { name: 'images', extensions: ['jpg'] });
-      console.log('dialogResult', dialogResult)
-      if (dialogResult.length > 0) {
-        this.projectDirectory = dialogResult[0];
-        this.isConfirmOpen = true
-                console.log('projectService', doesProjectExistForPath(this.projectDirectory))
-      } else {
+              console.log('dialogResult', dialogResult)
+              if (dialogResult.length > 0) {
+                this.projectDirectory = dialogResult[0];
+                this.isConfirmOpen = true
+                console.log('doesProjectExistForPath', doesProjectExistForPath(this.projectDirectory))
+              } else {
                 this.projectDirectory = '';
               }
-
-
+            },
+            triggerCreateProject: async function () {
+              await createProject(this.projectDirectory, this.projectName)
+              console.log('createProject')
             }
         }
 });
